@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" class="ie ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml"> <!--<![endif]-->
+<head>
+            <!-- OneTrust Cookies Consent Notice start -->
+        <script type="text/javascript" src="https://cookie-cdn.cookiepro.com/consent/344b837d-86b6-47fb-8672-75643001e53b/OtAutoBlock.js"></script>
+        <script src="https://cookie-cdn.cookiepro.com/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="344b837d-86b6-47fb-8672-75643001e53b"></script>
+
+        <script type="text/javascript">
+            // function to pull cookie value
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2)
+                    return parts.pop().split(";").shift();
+            }
+            function OptanonWrapper() {
+                var bannerAcceptButton = document.getElementById("onetrust-accept-btn-handler");
+                // IF logic needed here because ot-banner-sdk DIV is not injected on page loads if banner is not exposed
+                if (bannerAcceptButton != null) {
+                    bannerAcceptButton.addEventListener('click', function(){
+                        //console.log("Allowed all via Banner");
+                        location.reload();
+                    });
+                }
+
+                var pcAllowAllButton = document.getElementById("accept-recommended-btn-handler");
+                pcAllowAllButton.addEventListener('click', function(){
+                    //console.log("Allowed all via Preference Center");
+                    location.reload();
+
+                });
+
+                var pcSaveButton = document.getElementsByClassName("save-preference-btn-handler onetrust-close-btn-handler")[0];
+                pcSaveButton.addEventListener('click', function(){
+                    //console.log("Set custom settings via Preference Center");
+                    location.reload();
+                });
+
+                /*
+                var regCheck = /,C0001,/;
+                var regCheckPerformance = /,C0002,/;
+                var regCheckFunctional = /,C0003,/;
+                var regCheckTargeting = /,C0004,/;
+                var regCheckSocial = /,C0005,/;
+
+                if (OptanonActiveGroups.match(regCheck)) {
+                    var elements = document.getElementsByClassName("optanon-category-1");
+                    loadIframe(elements);
+                }
+                if (OptanonActiveGroups.match(regCheckTargeting)) {
+                    var elements = document.getElementsByClassName("optanon-category-4");
+                    loadIframe(elements);
+                }
+                if (OptanonActiveGroups.match(regCheckFunctional)){
+                    var elements = document.getElementsByClassName("optanon-category-3");
+                    loadIframe(elements);
+                }
+                if (OptanonActiveGroups.match(regCheckPerformance)){
+                    var elements = document.getElementsByClassName("optanon-category-2");
+                    loadIframe(elements);
+                }
+                if (OptanonActiveGroups.match(regCheckSocial)){
+                    var elements = document.getElementsByClassName("optanon-category-5");
+                    loadIframe(elements);
+                }
+                function loadIframe(elements){
+                    for(var i = 0; i < elements.length; i ++){
+                        //elements[i].tagName == "IFRAME" ? elements[i].setAttribute("src", elements[i].dataset.src) : -1;
+                        elements[i].setAttribute("src", 'about:blank');
+                    }
+                }
+               */
+                var elements = document.getElementsByClassName("optanon-category-5");
+                loadIframeBefore(elements,/,C0005,/);
+
+                var elements = document.getElementsByClassName("optanon-category-4");
+                loadIframeBefore(elements,/,C0004,/);
+            }
+            function loadIframeBefore(elements,regCheck){
+                for(var i = 0; i < elements.length; i ++){
+                    if (!OptanonActiveGroups.match(regCheck)) {
+                        elements[i].tagName == "IFRAME" ? elements[i].setAttribute("src", 'about:blank') : -1;
+                        elements[i].tagName == "EMBED" ? elements[i].setAttribute("src", 'about:blank') : -1;
+                    }
+                }
+            }
+        </script>
+        <!-- OneTrust Cookies Consent Notice end -->
+        <!-- Cxense SATI script begin -->
+    <script type="text/javascript">
+        window.cX = window.cX || {}; cX.callQueue = cX.callQueue || [];
+        cX.callQueue.push(['setSiteId', '1136227972865927392']);
+        cX.callQueue.push(['sendPageViewEvent']);
+        var sati_site_id =  '1136227972865927392';
+    </script>
+    <script type="text/javascript" async src="//code3.adtlgc.com/js/sati_init.js"></script>
+    <script type="text/javascript">
+        (function(d,s,e,t){e=d.createElement(s);e.type='text/java'+s;e.async='async';
+            e.src='http'+('https:'===location.protocol?'s://s':'://')+'cdn.cxense.com/cx.js';
+            t=d.getElementsByTagName(s)[0];t.parentNode.insertBefore(e,t);})(document,'script');
+    </script>
+    <!-- Cxense SATI script end -->
+<script src="https://www.googletagservices.com/tag/js/gpt.js"></script>
+    
+<script>
+var PREBID_TIMEOUT = 1000;
+var FAILSAFE_TIMEOUT = 1500;
+
+const customBuckestPriceIs = {
+  "buckets" : [{
+      "precision": 2,  //default is 2 if omitted - means 2.1234 rounded to 2 decimal places = 2.12
+      "min" : 0,
+      "max" : 3,
+      "increment" : 0.01  // from $0 to $5, 1-cent increments
+    },
+    {
+      "precision": 2,
+      "min" : 3,
+      "max" : 8,
+      "increment" : 0.05  // from $5 to $8, round down to the previous 5-cent increment
+    },
+    {
+      "precision": 2,
+      "min" : 8,
+      "max" : 20,
+      "increment" : 0.5   // from $8 to $40, round down to the previous 50-cent increment
+    }]
+};
+
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+var cX = cX || {};
+cX.callQueue = cX.callQueue || [];
+
+var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [];
+
+function initAdserver() {
+    if (pbjs.initAdserverSet) return;
+
+    googletag.cmd.push(function () {
+        pbjs.que.push(function () {
+            pbjs.setTargetingForGPTAsync();
+            googletag.pubads().refresh();
+        });
+    });
+
+    pbjs.initAdserverSet = true;
+}
+
+(function () {
+    var d = document;
+    var pbs = d.createElement("script");
+    pbs.type = "text/javascript";
+    pbs.src = 'https://www.yoda.ro/libraries/javascript/prebid/prebid2.40.0.js';
+    var target = d.getElementsByTagName("head")[0];
+    target.insertBefore(pbs, target.firstChild);
+})();
+//load GPT library here
+//(function () {
+//    var gads = document.createElement('script');
+//    gads.async = true;
+//    gads.type = 'text/javascript';
+//    var useSSL = 'https:' == document.location.protocol;
+//    gads.src = (useSSL ? 'https:' : 'http:') +
+//        '//www.googletagservices.com/tag/js/gpt.js';
+//    var node = document.getElementsByTagName('script')[0];
+//    node.parentNode.insertBefore(gads, node);
+//})();
+
+pbjs.que.push(function () {
+    var adUnits = [
+                {
+            //googletag.defineSlot("/36564804/yodaro/desktop/billboard", [[728, 90], [970, 250]], "div-gpt-ad-1540896267274-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896267274-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[728, 90], [970, 250]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 687690
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrozaktjrgpqt',
+                        masterId: '_hTroTRLiB3oXZMj7uQnV.uU85nTF7JKPb85ZUWAo9L.R7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrotciqqlkifn',
+                        masterId: 'IMxH3DwZh8IkyyZajfK44ANszcm6pybiNxk1gJhfUNP.n7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482210
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [728, 90],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [970, 250],
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425422"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425427"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/billboard2", [[728, 90], [970, 250]], "div-gpt-ad-1540896301839-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896301839-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[728, 90], [970, 250]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 687690
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrozaktjrgpqt',
+                        masterId: '_hTroTRLiB3oXZMj7uQnV.uU85nTF7JKPb85ZUWAo9L.R7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrotciqqlkifn',
+                        masterId: 'IMxH3DwZh8IkyyZajfK44ANszcm6pybiNxk1gJhfUNP.n7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482211
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [728, 90],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [970, 250],
+                    }
+                },
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688810
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425422"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425427"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/billboard3", [[970, 250], [728, 90]], "div-gpt-ad-1540896349803-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896349803-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[728, 90], [970, 250]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688811
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrozaktjrgpqt',
+                        masterId: '_hTroTRLiB3oXZMj7uQnV.uU85nTF7JKPb85ZUWAo9L.R7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'adocean',
+                    params: {
+                        slaveId: 'adoceanrotciqqlkifn',
+                        masterId: 'IMxH3DwZh8IkyyZajfK44ANszcm6pybiNxk1gJhfUNP.n7',
+                        emiter: 'ro.adocean.pl', 
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482214
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [728, 90],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [970, 250],
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425422"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425427"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/billboard4", [[970, 250], [728, 90]], "div-gpt-ad-1540896377784-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896377784-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[728, 90], [970, 250]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688812
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482216
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [728, 90],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [970, 250],
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425422"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425427"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/branding", [[1, 1], [1, 3], [970, 250]], "div-gpt-ad-1540896409077-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896409077-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[1, 1], [1, 3], [970, 250]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482244
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [1, 1],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [970, 250],
+                    }
+                },
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688813
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16425427"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/rectangle", [[300, 250], [336, 280], [300, 600]], "div-gpt-ad-1540896513483-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896513483-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[300, 250], [336, 280], [300, 600]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 687879
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 250],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 600],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [336, 280],
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482151
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16421790"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/rectangle2", [[300, 600], [300, 250], [336, 280]], "div-gpt-ad-1540896546358-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896546358-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[300, 250], [336, 280], [300, 600]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688815
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482204
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                        accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 250],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 600],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [336, 280],
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16421790"
+                    }
+                }]
+        },
+        {
+            //googletag.defineSlot("/36564804/yodaro/desktop/rectangle3", [[300, 250], [300, 600], [336, 280]], "div-gpt-ad-1540896576414-0").addService(googletag.pubads());
+            code: 'div-gpt-ad-1540896576414-0',
+            mediaTypes: {
+                banner: {
+                    sizes: [[300, 250], [336, 280], [300, 600]]
+                }
+            },
+            bids: [
+                {
+                    bidder: 'adform',
+                    params: {
+                        mid: 688816
+                    }
+                },
+                {
+                    bidder: 'rtbhouse',
+                    params: {
+                        region: 'prebid-eu',
+                        publisherId: '0E3cE2gvtzB21p9gz2ll'
+                    }
+                },
+                {
+                    bidder: 'criteo',
+                    params: {
+                        networkId: 7984
+                    }
+                },
+                {
+                    bidder: 'appnexus',
+                    params: {
+                        placementId: 16482207
+                    }
+                },
+                {
+                    bidder: 'mgid',
+                    params: {
+                    accountId : "258"
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 250],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [300, 600],
+                    }
+                },
+                {
+                    bidder: 'ix',
+                    params: {
+                        siteId: '388456',
+                        size: [336, 280],
+                    }
+                },
+                {
+                    bidder: 'xhb',
+                    params: {
+                        placementId : "16421790"
+                    }
+                }]
+        },
+        ];
+
+    pbjs.setConfig({
+        enableSendAllBids: true,
+        priceGranularity: customBuckestPriceIs,
+//        consentManagement: {
+//            cmpApi: 'static',
+//            allowAuctionWithoutConsent: true,
+//            consentData: {
+//                getConsentData: {
+//                    'gdprApplies': true,
+//                    'hasGlobalScope': true,
+//                    'consentData': 'BOOgjO9OOgjO9APABAENAi-AAAAWd7_______9____7_9uz_Gv_r_ff_3nW0739P1A_r_Oz_rm_-zzV44_lpQQRCEA'
+//                },
+//                getVendorConsents: {
+//                    'metadata': 'BOOgjO9OOgjO9APABAENAi-AAAAWd7_______9____7_9uz_Gv_r_ff_3nW0739P1A_r_Oz_rm_-zzV44_lpQQRCEA',
+//
+//                }
+//            }
+//        },
+        debug: false,
+        cache: {
+            url: false
+        },
+    });
+
+    pbjs.addAdUnits(adUnits);
+    
+    pbjs.bidderSettings = {
+        //standard
+        standard: {
+            adserverTargeting: [{
+                key: "hb_bidder",
+                val: function (bidResponse) {
+                    return bidResponse.bidderCode;
+                }
+            }, {
+                key: "hb_adid",
+                val: function (bidResponse) {
+                    return bidResponse.adId;
+                }
+            }, {
+                key: "hb_pb",
+                val: function (bidResponse) {
+                    //return bidResponse.pbMg;
+                    return bidResponse.pbCg;
+                }
+            }]
+
+        },
+        //criteo
+        criteo: {
+            sendStandardTargeting: false, //false: don't sends hb_bidder and hb_pb for Criteo bids.
+            alwaysUseBid: true, //true: always send Criteo keywords even if pbjs.enableSendAllBids is not used.
+            adserverTargeting: [
+                {
+                    key: "hb_crt_site",
+                    val: function (bidResponse) {
+                        return window.location.hostname;
+                    }
+                },
+                {
+                    key: "crt_pb",
+                    val: function (bidResponse) {
+                        if (!bidResponse.cpm) { return null; }
+                        var ranges = [[0, 3, 0.01], [3, 8, 0.05], [8, 20, 0.5], [20, 50, 1]]; //Input here custom buckets for Criteo
+                        var bk = 'pbDg'; //Input here fallback strategy (pbDg for dense)
+
+                        try {
+                            for (range of ranges) {
+                                if (bidResponse.cpm > range[0] && bidResponse.cpm <= range[1]) {
+                                    return (Math.floor(bidResponse.cpm / range[2] + 0.0001) * range[2]).toFixed(2);;
+                                }
+                            }
+                            if (bidResponse.cpm < ranges[0][0]) {
+                                return null;
+                            }
+                            else {
+                                return (ranges[ranges.length - 1][1]).toFixed(2);;
+                            }
+                        }
+                        catch (e) {
+                            return bidResponse[bk];
+                        }
+
+                    }
+                },
+                {
+                    key: "crt_bidid",
+                    val: function (bidResponse) {
+                        return bidResponse.adId; //send the raw CPM
+                    }
+                },
+            ]
+        },
+        //fb
+        audienceNetwork: {
+            adserverTargeting: [
+                {
+                    key: "fb_bidid",
+                    val: function (bidResponse) {
+                        // make the bidId available for targeting if required
+                        return bidResponse.fb_bidid;
+                    }
+                },
+                {
+                    key: "hb_bidder",
+                    val: function (bidResponse) {
+                        return bidResponse.bidderCode;
+                    }
+                },
+                {
+                    key: "hb_pb",
+                    val: function (bidResponse) {
+                        return bidResponse.pbMg;
+                    }
+                },
+            ],
+        },
+        //adOcean
+        AdOcean: {
+            bidCpmAdjustment: function(bidCpm, bid) { 
+                console.log('Bidder is: ' + bid.bidderCode); 
+                return bidCpm * .85; 
+            }
+        },
+        //next adserver
+
+
+    }
+    pbjs.requestBids({
+        timeout: PREBID_TIMEOUT,
+        bidsBackHandler: function (bidResponses) {
+            initAdserver();
+        }
+    });
+
+});
+// in case PBJS doesn't load
+setTimeout(initAdserver, FAILSAFE_TIMEOUT);
+</script>
+
+            <script type="text/javascript">
+                var googletag = googletag || {};
+                googletag.cmd = googletag.cmd || [];
+                var cX = cX || {};
+                cX.callQueue = cX.callQueue || [];
+
+                cX.callQueue.push(["invoke", function() {
+                    googletag.cmd.push(function() {
+                        try{googletag.defineSlot("36564804/yodaro/desktop/billboard", [728, 90], "div-gpt-ad-1540896267274-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/billboard2", [[728, 90], [970, 250]], "div-gpt-ad-1540896301839-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/billboard3", [[970, 250], [728, 90]], "div-gpt-ad-1540896349803-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/billboard4", [[970, 250], [728, 90]], "div-gpt-ad-1540896377784-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/branding", [[1, 1], [1, 3], [970, 250]], "div-gpt-ad-1540896409077-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle", [[300, 250], [336, 280], [300, 600]], "div-gpt-ad-1540896513483-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle2", [[300, 600], [300, 250], [336, 280]], "div-gpt-ad-1540896546358-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle3", [[300, 250], [300, 600], [336, 280]], "div-gpt-ad-1540896576414-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle4", [[300, 600], [300, 250], [336, 280]], "div-gpt-ad-1540896612202-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle5", [[336, 280], [300, 250], [300, 600]], "div-gpt-ad-1540896645060-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineSlot("36564804/yodaro/desktop/rectangle6", [[300, 600], [300, 250], [336, 280]], "div-gpt-ad-1540896674813-0").addService(googletag.pubads());} catch(e){}
+try{googletag.defineOutOfPageSlot("36564804/yodaro/desktop/special", "div-gpt-ad-1540896674813-0").addService(googletag.pubads());} catch(e){} 
+                        googletag.pubads().enableSingleRequest();
+                        googletag.pubads().disableInitialLoad();googletag.pubads().collapseEmptyDivs();
+                        googletag.pubads().setTargeting("content_category", "homepage");
+                        googletag.pubads().setTargeting("CxSegments", cX.getUserSegmentIds({persistedQueryId: "d99789c9dfe1a7182127f4e561fe292eaefcff25"}));
+                        googletag.enableServices();
+                    });
+                }]);
+            </script>
+        <!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-PG3MFFM');</script> <!-- End Google Tag Manager --><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="robots" content="index, follow" />
+<meta http-equiv="googlebot" content="index, all" />
+<meta http-equiv="robots" content="archive" />
+<meta http-equiv="rating" content="General" />
+<meta http-equiv="googlebot" content="archive" />    
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+<meta name="google-site-verification" content="kvNywPppb_zuw7Be6gkm7OIvB4D5lgBTK4d5THSom_k" />
+<title>www.yoda.ro</title>
+<link href="https://www.yoda.ro/rss" rel="alternate" type="application/rss+xml" title="RSS 2.0" />
+<link href="https://www.yoda.ro/" rel="canonical" />
+<link href="https://d1.a4w.ro/yoda/_css/www.yoda.ro_yoda_error.css?q=1594996942" media="screen" rel="stylesheet" type="text/css" /><script type="text/javascript">
+// <!--
+var domain = 'https://www.yoda.ro/';
+var site_url = 'https://www.yoda.ro/';
+var VIDEO_PLAYER = 'tfm';
+var error_message = '';
+var bula = '';
+    var demo="N";
+    var section = 'yoda_homepage';
+// -->
+</script>
+<link rel="Shortcut Icon" type="image/png" href="https://d1.a4w.ro/yoda/design/images/favicon.png" />
+<!-- Apple icons -->
+<link href="https://d1.a4w.ro/yoda/design/images/apple-touch-icon.png" rel="apple-touch-icon" />
+<link href="https://d1.a4w.ro/yoda/design/images/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+<link href="https://d1.a4w.ro/yoda/design/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+<link href="https://d1.a4w.ro/yoda/design/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+
+<!-- BRANDING TECHSCHOOL -->
+	<!-- /BRANDING TECHSCHOOL -->
+<script type="text/javascript" src="https://www.yoda.ro/libraries/javascript/jquery-1.8.1.min.js"></script>
+<script async type="text/javascript" src="//hm732.com/gccq3nndwp8tolzap74hs4e1r.js"></script>
+
+    
+   
+    
+<meta name="cXenseParse:pageclass" content="frontpage" />
+<meta name="cXenseParse:url" content="https://www.yoda.ro/favicon.ico" />
+
+</head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PG3MFFM"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><div id="fb-root"></div>
+<!-- facebook sources -->
+<div class="offscreen">
+    </div>
+
+
+                
+    <div class="above-menu">
+                                    <div id='div-gpt-ad-1540896267274-0'>
+                <div id="div-gpt-ad-1540896267274-0">
+            <script>
+                cX.callQueue.push(["invoke", function() {
+                    googletag.cmd.push(function() { googletag.display("div-gpt-ad-1540896267274-0"); });
+                }]);
+            </script>
+        </div>               </div>
+                
+                        </div><!-- end above-menu -->
+<div class="header default mod">
+    <div class="header-content section">
+        <a href="https://www.yoda.ro/" class="logo"><span>Yoda</span></a>
+        <a href="" class="search-box-button"></a>
+        <a href="" class="main-nav-button"></a>
+
+        <div class="search-box">
+            <form name="search_form" method="post" action="https://www.yoda.ro/cautare">
+                <input name="keywords" id="search_keywords" type="text" placeholder="CAUTA..." class="search-input" />
+            </form>
+            <a href="javascript:void(0);" onclick="document.search_form.submit();" class="search-button"></a>
+        </div>
+
+        
+        <div class="main-nav">
+            <ul>
+               
+                                    
+                    
+                    <li id="menu_item_0" class=" dd">
+                        <a href="https://www.yoda.ro/mobile" title="Mobile">
+                            Mobile                        </a>
+
+                                                                            <ul class="sub-nav">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/smartphones" title="Smartphones">
+                                            Smartphones                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/tablete" title="Tablete">
+                                            Tablete                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/mwc-2013" title="MWC 2013">
+                                            MWC 2013                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li class="sep"></li>
+                    <li id="menu_item_1" class=" dd">
+                        <a href="https://www.yoda.ro/gadgeturi" title="Gadgeturi">
+                            Gadgeturi                        </a>
+
+                                                                            <ul class="sub-nav">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/ifa-berlin" title="IFA Berlin">
+                                            IFA Berlin                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/gadgeturile-copilariei" title="Gadgeturile copilariei">
+                                            Gadgeturile copilariei                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/ces-2013" title="CES 2013">
+                                            CES 2013                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/foto-video" title="Foto & Video">
+                                            Foto & Video                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/tv-electronice" title="TV & Electronice">
+                                            TV & Electronice                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/fun" title="Fun">
+                                            Fun                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/gps" title="GPS">
+                                            GPS                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li class="sep"></li>
+                    <li id="menu_item_2" class=" dd">
+                        <a href="https://www.yoda.ro/online" title="Online">
+                            Online                        </a>
+
+                                                                            <ul class="sub-nav">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/virale" title="Virale">
+                                            Virale                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/smart-nation" title="Smart nation">
+                                            Smart nation                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li class="sep"></li>
+                    <li id="menu_item_3" class="">
+                        <a href="https://www.yoda.ro/jocuri" title="Jocuri">
+                            Jocuri                        </a>
+
+                                                                                            </li>
+                                                        
+                    <li class="sep"></li>
+                    <li id="menu_item_4" class=" dd">
+                        <a href="https://www.yoda.ro/calculatoare" title="Calculatoare">
+                            Calculatoare                        </a>
+
+                                                                            <ul class="sub-nav">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/software" title="Software">
+                                            Software                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/hardware" title="Hardware">
+                                            Hardware                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/laptopuri" title="Laptopuri">
+                                            Laptopuri                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/desktop" title="Desktopuri">
+                                            Desktopuri                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li class="sep"></li>
+                    <li id="menu_item_5" class=" dd">
+                        <a href="https://www.yoda.ro/stiinta" title="Stiinta">
+                            Stiinta                        </a>
+
+                                                                            <ul class="sub-nav">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/cern" title="CERN">
+                                            CERN                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                </ul>
+        </div>
+                
+        
+        <div class="main-nav-touch">
+            <ul>
+
+                <li id="menu_item_bf" class="">
+                    <a href="https://bf.yoda.ro" target="_blank" title="Black Friday">
+                        Black Friday
+                    </a>
+                </li>   
+                <li class="sep"></li>
+
+                                    
+                    <li id="menu_item_0" class=" dd">
+                        <a href="https://www.yoda.ro/mobile" title="Mobile">
+                            Mobile                        </a>
+
+                                                                            <ul class="sub-nav-touch">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/smartphones" title="Smartphones">
+                                            Smartphones                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/tablete" title="Tablete">
+                                            Tablete                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/mwc-2013" title="MWC 2013">
+                                            MWC 2013                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li id="menu_item_1" class=" dd">
+                        <a href="https://www.yoda.ro/gadgeturi" title="Gadgeturi">
+                            Gadgeturi                        </a>
+
+                                                                            <ul class="sub-nav-touch">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/ifa-berlin" title="IFA Berlin">
+                                            IFA Berlin                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/gadgeturile-copilariei" title="Gadgeturile copilariei">
+                                            Gadgeturile copilariei                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/ces-2013" title="CES 2013">
+                                            CES 2013                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/foto-video" title="Foto & Video">
+                                            Foto & Video                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/tv-electronice" title="TV & Electronice">
+                                            TV & Electronice                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/fun" title="Fun">
+                                            Fun                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/gps" title="GPS">
+                                            GPS                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li id="menu_item_2" class=" dd">
+                        <a href="https://www.yoda.ro/online" title="Online">
+                            Online                        </a>
+
+                                                                            <ul class="sub-nav-touch">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/virale" title="Virale">
+                                            Virale                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/smart-nation" title="Smart nation">
+                                            Smart nation                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li id="menu_item_3" class="">
+                        <a href="https://www.yoda.ro/jocuri" title="Jocuri">
+                            Jocuri                        </a>
+
+                                                                                            </li>
+                                                        
+                    <li id="menu_item_4" class=" dd">
+                        <a href="https://www.yoda.ro/calculatoare" title="Calculatoare">
+                            Calculatoare                        </a>
+
+                                                                            <ul class="sub-nav-touch">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/software" title="Software">
+                                            Software                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/hardware" title="Hardware">
+                                            Hardware                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/laptopuri" title="Laptopuri">
+                                            Laptopuri                                        </a>                                                    
+                                    </li>
+                                                                    <li>
+                                        <a href="https://www.yoda.ro/desktop" title="Desktopuri">
+                                            Desktopuri                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                        
+                    <li id="menu_item_5" class=" dd">
+                        <a href="https://www.yoda.ro/stiinta" title="Stiinta">
+                            Stiinta                        </a>
+
+                                                                            <ul class="sub-nav-touch">
+                                                                    <li class="first">
+                                        <a href="https://www.yoda.ro/cern" title="CERN">
+                                            CERN                                        </a>                                                    
+                                    </li>
+                                                            </ul>
+                                                                    </li>
+                                                </ul>
+        </div>
+
+    </div>
+</div><!-- end header -->
+            <div class="branding">
+                                                <div class="top-branding">
+                        <div id='div-gpt-ad-1540896409077-0'>
+                    <div id="div-gpt-ad-1540896409077-0">
+            <script>
+                cX.callQueue.push(["invoke", function() {
+                    googletag.cmd.push(function() { googletag.display("div-gpt-ad-1540896409077-0"); });
+                }]);
+            </script>
+        </div>                    </div>
+                    </div>
+                                    </div><!-- end branding -->
+    
+
+<div class="wrapper middle-line mod">
+    <div class="left-line mod">
+        <div class="right-line mod">
+
+            <div class="wide overflow mod">
+    <div class="breadcrumbs article-breadcrumbs mod">
+        <ul>
+            <li><a href="https://www.yoda.ro/">Yoda.ro</a></li>
+            <li class="sep"></li>
+            <li>Eroare 404</li>
+        </ul>
+    </div><!-- end breadcrumbs -->
+
+ 
+</div><!-- end wide -->
+
+
+
+<div class="two-cols" style="padding:30px 0;">
+      
+      <img src="https://d1.a4w.ro/yoda/design/images/404.gif" alt="eroare" style="float:left" />
+      
+		   	  <div style="float:left; font-size:14px;">
+		      <p style="font-weight:bold;">Ne cerem scuze, dar pagina pe care o cautati nu exista.</p>
+		      <p>Ce puteti face?</p>
+		      <ul>
+		      	<li style="margin:0 0 15px 15px;">1. Mergeti <a href="#" onclick="history.go(-1);">inapoi</a> in pagina de unde ati venit.</li>
+		      	<li style="margin:0 0 15px 15px;">2. Folositi butonul "Cauta" de mai sus pentru a cauta altceva.</li>  
+		      </ul>
+		      </div>
+      
+      <div class="clear"></div>
+  
+</div>
+    
+     
+            
+            
+            <div class="cross-promo mod">
+
+    <div id="cross_promo_incont" class="column">
+	<div class="column-content">
+		<a href="http://incont.stirileprotv.ro/" rel="nofollow" target="_blank" class="site-title">Incont.stirileprotv.ro</a>
+
+	    <ul>
+							<li class="mod first">
+			        			            <a href="https://incont.stirileprotv.ro/auto/reuters-elon-musk-s-a-intalnit-cu-seful-grupului-volkswagen-si-a-testat-noul-automobil-electric-al-vw.html" rel="nofollow" target="_blank" class="cp-article-image"><img src='https://assets.protv.ro/assets/incont/2020/05/12/image_galleries/71228/inca-o-previziune-bizara-a-excentricului-elon-musk-tehnologia-care-va-face-inutila-ca-vorbirea-umana-in_size2.jpg' />Directorul general al Tesla, Elon Musk, s-a întâlnit cu şeful grupului Volkswagen, Herbert Diess, în Germania, unde a testat noul automobil electric al VW, a declarat o sursă apropiată situaţiei, citată de Reuters.</a>
+			        
+			        <a href="https://incont.stirileprotv.ro/auto/reuters-elon-musk-s-a-intalnit-cu-seful-grupului-volkswagen-si-a-testat-noul-automobil-electric-al-vw.html" rel="nofollow" target="_blank" class="cp-article-title">Reuters: Elon Musk s-a întâlnit cu şeful grupului Volkswagen şi a testat noul automobil electric al VW, în Germania</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://incont.stirileprotv.ro/international/europa-vrea-mai-multi-bani-de-la-gigantii-it-americani-comisar-ue-sunt-adevaratii-castigatori-ale-crizei.html" rel="nofollow" target="_blank" class="cp-article-title">Europa vrea mai mulți bani de la giganții IT americani. Comisar UE: ”Sunt adevărații câştigători ale crizei coronavirusului şi ar trebui să plătească taxe corecte”</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://incont.stirileprotv.ro/auto/fostul-director-general-al-dacia-nicolas-maure-va-superviza-redresarea-grupului-renault-francezii-au-anuntat.html" rel="nofollow" target="_blank" class="cp-article-title">Fostul director general al Dacia Nicolas Maure va superviza redresarea grupului Renault. Francezii au anunțat pierderi istorice, pe fondul pandemiei</a>
+			    </li>
+		    		</ul>
+	</div>
+</div>    <div id="cross_promo_sport" class="column">
+	<div class="column-content">
+		<a href="http://www.sport.ro/" rel="nofollow" target="_blank" class="site-title">Sport.ro</a>
+	    
+	    <ul>
+							<li class="mod first">
+			        			            <a href="https://www.sport.ro/liga-1/ionut-stroe-a-dezvaluit-unde-ar-putea-sa-joace-fcsb-aceasta-arena-va-fi-in-proportie-de-90-a-ministerului.html" rel="nofollow" target="_blank" class="cp-article-image"><img src="https://assets.sport.ro/assets/sport/2020/09/06/image_galleries/708290/ionut-stroe-a-dezvaluit-pe-ce-arena-ar-putea-sa-si-dispute-meciurile-de-acasa-fcsb-aceasta-arena-va-fi_1_1_1_size4.jpg" width="195" height="120" />"FCSB ar putea primi sansa sa-si dispute meciurile pe o noua arena.</a>
+			        
+			        <a href="https://www.sport.ro/liga-1/ionut-stroe-a-dezvaluit-unde-ar-putea-sa-joace-fcsb-aceasta-arena-va-fi-in-proportie-de-90-a-ministerului.html" rel="nofollow" target="_blank" class="cp-article-title">Veste buna pentru Becali si FCSB! Ros-albastrii au unde juca dupa ce au fost INTERZISI in Ghencea!</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://www.sport.ro/tenis/breaking-news-nemaivazut-djokovic-a-fost-descalificat-de-la-us-open-dupa-un-gest-nesportiv-ce-a-facut.html" rel="nofollow" target="_blank" class="cp-article-title">BREAKING NEWS | NEMAIVAZUT!!! Djokovic a fost DESCALIFICAT de la US Open dupa un gest nesportiv: ce a facut liderul mondial</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://www.sport.ro/campionate-externe/lui-planic-nu-i-este-frica-de-furia-lui-becali-primele-declaratii-ale-fundasului-dupa-ce-a-semnat-cu-maccabi.html" rel="nofollow" target="_blank" class="cp-article-title">Lui Planic nu-i este frica de furia lui Becali! Primele declaratii ale fundasului dupa ce a semnat cu Maccabi Haifa</a>
+			    </li>
+		    		</ul>
+	</div>
+</div>    <div id="cross_promo_stiri" class="column">
+	<div class="column-content">
+		<a href="http://stirileprotv.ro/" rel="nofollow" target="_blank" class="site-title">Stirileprotv.ro</a>
+
+	    <ul>
+							<li class="mod first">
+			        			            <a href="https://stirileprotv.ro/stiri/international/mesajul-emotionant-transmis-de-jacob-blake-dupa-ce-a-fost-impuscat-in-spate-nimic-altceva-decat-durere.html" rel="nofollow" target="_blank" class="cp-article-image">
+			            	<img width="180" src="https://image.stirileprotv.ro/media/images/160x120/Sep2020/62146346.jpg" />
+			            </a>
+			        
+			        <a href="https://stirileprotv.ro/stiri/international/mesajul-emotionant-transmis-de-jacob-blake-dupa-ce-a-fost-impuscat-in-spate-nimic-altceva-decat-durere.html" rel="nofollow" target="_blank" class="cp-article-title">Mesajul emoționant transmis de Jacob Blake, după ce a fost împușcat în spate: "Nimic altceva decât durere"</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://stirileprotv.ro/stiri/international/papa-francisc-barfele-sunt-o-ciuma-mai-ingrozitoare-decat-covid-19.html" rel="nofollow" target="_blank" class="cp-article-title">“O ciumă mai îngrozitoare decât COVID-19”. Avertisment dur din partea papei Francisc</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://stirileprotv.ro/stiri/socant/tanarul-disparut-in-muntii-bucegi-gasit-mort-dupa-mai-mult-de-o-luna-cum-a-fost-descoperit-cadavrul.html" rel="nofollow" target="_blank" class="cp-article-title">Tânărul dispărut în Munții Bucegi, găsit mort după mai mult de o lună. Cum a fost descoperit cadavrul</a>
+			    </li>
+		    		</ul>
+	</div>
+</div>    
+</div><!-- end cross-promo -->
+
+<div class="cross-promo mod">
+
+    <div class="column">
+	<div class="column-content">
+		<a href="http://debarbati.ro/" rel="nofollow" target="_blank" class="site-title">deBarbati.ro</a>
+
+	    <ul>
+							<li class="mod first">
+			        			            <a href="https://www.debarbati.ro/auto/p-vrei-sa-achizitionezi-o-masina-second-hand-iti-prezentam-5-aspecte-de-care-sa-tii-cont-cand-o-alegi.html" rel="nofollow" target="_blank" class="cp-article-image"><img width="180" height="100"  src='https://assets.protv.ro/assets/debarbati/2020/09/04/image_galleries/8189/p-vrei-sa-achizitionezi-o-masina-second-hand-iti-prezentam-5-aspecte-de-care-sa-tii-cont-cand-o-alegi_size2.jpg' width='500' height='275' /></a>
+			        
+			        <a href="https://www.debarbati.ro/auto/p-vrei-sa-achizitionezi-o-masina-second-hand-iti-prezentam-5-aspecte-de-care-sa-tii-cont-cand-o-alegi.html" rel="nofollow" target="_blank" class="cp-article-title">(P) Vrei să achiziționezi o mașină second-hand? Îți prezentăm 5 aspecte de care să ții cont când o alegi!</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://www.debarbati.ro/style/p-kitul-complet-cu-acumulator-de-la-makita-bucura-te-de-libertate-si-experiente-de-neuitat-la-drum.html" rel="nofollow" target="_blank" class="cp-article-title">(P) Kitul complet cu acumulator de la Makita: bucură-te de libertate și experiențe de neuitat, la drum</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://www.debarbati.ro/style/p-sfaturi-pentru-amenajarea-holului-apartamentului-de-bloc.html" rel="nofollow" target="_blank" class="cp-article-title">(P) Sfaturi pentru amenajarea holului apartamentului de bloc</a>
+			    </li>
+		    		</ul>
+	</div>
+</div>    <div id="cross_promo_procinema" class="column">
+	<div class="column-content">
+		<a href="http://www.procinema.ro/" rel="nofollow" target="_blank" class="site-title">Procinema.ro</a>
+	    
+	    <ul>
+							<li class="mod first">
+			        			            <a href="https://procinema.protv.ro/stiri/p-5-trucuri-ca-sa-nu-te-abati-de-la-dieta-in-timpul-weekendurilor.html" rel="nofollow" target="_blank" class="cp-article-image"><img width='180' src='https://assets.sport.ro/assets/procinema/2020/09/04/image_galleries/35670/p-5-trucuri-ca-sa-nu-te-abati-de-la-dieta-in-timpul-weekendurilor_size3.jpg' width='330' height='500' /></a>
+			        
+			        <a href="https://procinema.protv.ro/stiri/p-5-trucuri-ca-sa-nu-te-abati-de-la-dieta-in-timpul-weekendurilor.html" rel="nofollow" target="_blank" class="cp-article-title">(P) 5 trucuri ca să nu te abați de la dietă în timpul weekendurilor</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://procinema.protv.ro/stiri/p-cum-alegi-cele-mai-bune-covoare-pentru-casa-ta.html" rel="nofollow" target="_blank" class="cp-article-title">(P) Cum alegi cele mai bune covoare pentru casa ta</a>
+			    </li>
+		    				<li class="mod">
+			        
+			        <a href="https://procinema.protv.ro/stiri/p-pranzul-la-birou-5-mancaruri-satioase-pe-care-le-poti-servi.html" rel="nofollow" target="_blank" class="cp-article-title">(P) Prânzul la birou: 5 mâncăruri sățioase pe care le poți servi</a>
+			    </li>
+		    		</ul>
+	</div>
+</div>    
+</div><!-- end cross-promo -->
+
+<div class="footer mod">
+	<div class="copyright">Copyright &copy; 2020 PRO TV S.R.L | <a href="https://www.yoda.ro/terms">Termeni si conditii</a> | <a href="https://www.yoda.ro/rss"><img src="https://d1.a4w.ro/yoda/design/images/rss.gif" alt="RSS" style="display:inline;"> RSS</a> | <a href="https://www.yoda.ro/contact">Contacteaza-ne</a> | <a href="http://web3.protv.ro/assets/yoda/yahoo/Yahoo_news_production.rss" target="_blank">Feed</a></div>
+</div><!-- end footer -->
+
+<div class="footer-internet mod">
+   <link href="https://assets.protv.ro/design/footer/footer.css?c=2" rel="stylesheet" media="screen" type="text/css" />
+<div id="ibu_footer_container">
+    <div class="footer-internet-main">
+        <div class="container">
+            <div class="footerinternet">
+                <div class="footer-internet-column">
+                    <div id="cinema" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-cinema');">Cinema</div>
+                        <div id="category-cinema">
+                            <a href="http://www.procinema.ro/" target="blank" rel="nofollow">PRO•CINEMA</a>
+                        </div>
+                    </div>
+                    <div id="entertainment" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-entertainment');">Divertisment</div>
+                        <div id="category-entertainment">
+                            <a href="http://www.protv.ro/" target="blank" rel="nofollow">PRO•TV</a>
+                            <a href="http://romaniiautalent.protv.ro/" target="blank" rel="nofollow">Romanii au talent</a>
+                            <a href="http://vocearomaniei.protv.ro/" target="blank" rel="nofollow">Vocea Romaniei</a>
+                            <a href="http://lasfierbinti.protv.ro/" target="blank" rel="nofollow">Las Fierbinti</a>
+                            <a href="http://lamaruta.protv.ro/" target="blank" rel="nofollow">La Maruta</a>
+                            <a href="http://apropotv.protv.ro/" target="blank" rel="nofollow">Apropo TV</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-internet-column">
+                    <div id="news" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-news');">Stiri</div>
+                        <div id="category-news">
+                            <a href="http://stirileprotv.ro/" target="blank" rel="nofollow">Stirile PRO•TV</a>
+                            <a href="http://romaniateiubesc.stirileprotv.ro/" target="blank" rel="nofollow">Romania, te iubesc!</a>
+                        </div>
+                    </div>
+                    <div id="tech" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-tech');">Tehnologie</div>
+                        <div id="category-tech">
+                            <a href="http://stirileprotv.ro/stiri/ilikeit" target="blank" rel="nofollow">I Like IT</a>
+                            <a href="http://www.yoda.ro/" target="blank" rel="nofollow">Yoda</a>
+                        </div>
+                    </div>
+                    <div id="sport" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-sport');">Sport</div>
+                        <div id="category-sport">
+                            <a href="https://www.sport.ro/" target="blank" rel="nofollow">Sport.ro</a>
+                            <a href="http://www.proxtv.ro/" target="blank" rel="nofollow">PRO•X</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-internet-column">
+                    <div id="jobs" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-jobs');">Joburi PRO</div>
+                        <div id="category-jobs">
+                            <a target="blank" rel="nofollow" href="https://www.linkedin.com/company/pro-tv/">Job-uri disponibile PRO•TV</a>
+                        </div>
+                    </div>
+                    <div id="lifestyle" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-lifestyle');">Lifestyle</div>
+                        <div id="category-lifestyle">
+                            <a target="blank" rel="nofollow" href="http://stirileprotv.ro/stiri/csid/">Ce se intampla, Doctore?</a>
+                            <a target="blank" rel="nofollow" href="http://www.pro2.ro/">PRO•2</a>
+                            <a target="blank" rel="nofollow" href="http://www.progoldtv.ro/">PRO•GOLD</a>
+                            <a target="blank" rel="nofollow" href="http://www.perfecte.ro/">Perfecte</a>
+                            <a target="blank" rel="nofollow" href="http://debarbati.ro/">DeBarbati</a>
+                            <a target="blank" rel="nofollow" href="https://foodstory.ro/">Foodstory</a>
+                        </div>
+                    </div>
+                    <div id="economy" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-economy');">Economic</div>
+                        <div id="category-economy">
+                            <a target="blank" rel="nofollow" href="http://www.incont.stirileprotv.ro/">InCont</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-internet-column">
+                    <div id="plus" class="cat-group">
+                        <div class="cat-title"><a target="blank" rel="nofollow" href="http://www.protvplus.ro/">PRO•TV PLUS</a></div>
+                    </div>
+                    <div id="voyo" class="cat-group">
+                        <div class="cat-title"><a target="blank" rel="nofollow" href="http://www.voyo.ro/">Voyo</a></div>
+                    </div>
+                    <div id="aboutpro" class="cat-group">
+                        <div class="cat-title" onclick="toggle_visibility('category-aboutpro');">Despre</div>
+                        <div id="category-aboutpro">
+                                                        <a target="blank" rel="nofollow" href="https://www.protv.ro/about-cookies">Politica de Cookie</a>
+                            <a target="blank" rel="nofollow" href="https://www.protv.ro/confidentialitate">Politica Confidentialitate</a>
+                            <a target="blank" rel="nofollow" href="https://www.protv.ro/corporate/">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var opensanssheet = document.createElement("link");
+    opensanssheet.type = "text/css";
+    opensanssheet.rel = "stylesheet";
+    opensanssheet.media = "all";
+    opensanssheet.href = "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800";
+    document.getElementsByTagName("head")[0].appendChild(opensanssheet);
+
+</script>
+<!-- end footer-internet -->
+</div>
+<script type="text/javascript">
+    var w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName('body')[0],
+            z = w.innerWidth || e.clientWidth || g.clientWidth,
+            y = w.innerHeight || e.clientHeight || g.clientHeight;
+
+    function toggle_visibility(id) {
+        var e = document.getElementById(id);
+        //console.log(e);
+        if (z < 992) {
+            e.style.display = ((e.style.display !== 'block') ? 'block' : 'none');
+        }
+    }
+</script>
+	
+</div><!-- end footer-internet -->
+
+<!-- GENERATED BY 10.135.0.45 at 00:13:46-->
+        </div><!-- end right-line -->
+    </div><!-- end left-line -->
+</div><!-- end wrapper -->
+<script>
+$(document).ready(function(){
+//$.noConflict();
+    $('div.main-nav > ul > li.dd > a').on('click',function(e){
+        if ( $('div.wrapper').width() < 1000 ) {
+            e.preventDefault();
+            $(this).parent().toggleClass("over");
+        }
+    });
+
+    $('div.main-nav > ul > li.dd').on({
+        mouseenter: function(){
+            if ( $('div.wrapper').width() >= 1000 ) {
+                    $(this).addClass("over");
+            }
+        },
+        mouseleave: function(){
+            if ( $('div.wrapper').width() >= 1000 ) {
+                $(this).removeClass("over");
+            }
+        }
+    });
+
+    $('a.search-box-button').on('click',function(e){
+        e.preventDefault();
+        $('div.main-nav-touch').fadeOut('fast');
+        $('div.search-box').toggleClass('opened');
+    });
+
+    $('a.main-nav-button').on('click',function(e){
+        e.preventDefault();
+        $('div.main-nav-touch').slideToggle('fast');
+        $('div.search-box').removeClass('opened');
+    });
+
+    $('div.main-nav-touch > ul > li.dd > a').on('click',function(e){
+        e.preventDefault();
+        $(this).parent().toggleClass('selected');
+        $(this).parent().find('ul.sub-nav-touch').slideToggle('fast');
+    });
+
+            $(window).on('resize',function(){
+            if ( $('div.wrapper').width() < 660 ) {
+                $('div.main-nav-touch').fadeOut('fast');
+            }
+        });
+        });
+</script>
+            <div class="flash">
+                 
+        </div>
+    
+
+<!-- GENERATION TIME 0.78589606285095 -->
+    <!-- CookiePro Cookies Settings button start -->
+    <a class="optanon-toggle-display" id="ot-sdk-btn"><span class="ot-sdk-btn-text">Modifică Setările</span><span class="ot-sdk-btn-icon"></span></a>
+    <!-- CookiePro Cookies Settings button end -->
+</body>
+</html>
